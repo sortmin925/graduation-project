@@ -1,6 +1,14 @@
 <template>
   <div class="dashboard-container">
-    <div class="dashboard-text">name: {{ name }}</div>
+    <div class="dashboard-text">
+      <div class="dashboard-body">
+        name: {{ name }}
+      </div>
+      <div class="dashboard-button">
+        <el-button type="primary">游戏规则</el-button>
+        <el-button type="primary" @click="computerPlay">与电脑对战</el-button>
+      </div>
+    </div>
     <div class="dashboard-lobby">
       <div class="dashboard-title">当前在线玩家</div>
       <div
@@ -35,6 +43,11 @@ export default {
     IO.on('allUsers', (msg) => {
       this.playerList = msg.users.filter(item => item.username !== this.name)
     })
+  },
+  methods: {
+    computerPlay() {
+      this.$router.push({ path: '/computerPlay/index' })
+    }
   }
 }
 </script>

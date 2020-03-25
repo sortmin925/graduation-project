@@ -85,14 +85,14 @@ export const constantRoutes = [
   },
 
   {
-    path: '/form',
+    path: '/computerPlay',
     component: Layout,
     children: [
       {
         path: 'index',
-        name: 'Form',
+        name: 'computerPlay',
         component: () => import('@/views/form/index'),
-        meta: { title: 'Form', icon: 'form' }
+        meta: { title: '电脑对战', icon: 'computer' }
       }
     ]
   },
