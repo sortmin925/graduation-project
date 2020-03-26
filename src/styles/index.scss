@@ -61,5 +61,7 @@ div:focus {
 
 // main-container global css
 .app-container {
+  height: calc(100vh - 50px);
+  width: 100%;
   padding: 20px;
 }

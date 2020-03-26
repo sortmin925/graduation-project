@@ -1,5 +1,6 @@
 <template>
-  <div class="game-body">
+  <div class="game">
+    <gameBody :player-list="playerList" />
     <el-dialog
       title="选择职业"
       :visible.sync="dialogVisible"
@@ -28,9 +29,13 @@
 <script>
 import { soldier, hunter, master } from '@/png'
 import { mapGetters } from 'vuex'
+import gameBody from './gameBody'
 
 export default {
   name: 'Game',
+  components: {
+    gameBody
+  },
   props: {
     player: {
       type: String,
@@ -39,7 +44,7 @@ export default {
   },
   data() {
     return {
-      playerState: [],
+      playerList: [],
       careers: [
         {
           name: '战士',
@@ -67,32 +72,33 @@ export default {
       'name'
     ]),
     dialogVisible() {
-      return this.playerState.length === 0
+      return this.playerList.length === 0
     }
   },
   methods: {
     chooseCareer() {
-      this.playerState.push({
+      this.playerList.push({
         username: name,
         career: this.clickCareer.name,
         imagePath: this.clickCareer.imagePath
       })
       if (this.player === 'computer') {
         const random = Math.floor(Math.random() * (2 + 1))
-        this.playerState.push({
+        this.playerList.push({
           username: 'computer',
           career: this.careers[random].name,
           imagePath: this.careers[random].imagePath
         })
       }
-      console.log(this.playerState)
     }
   }
 }
 </script>
 
 <style lang="scss">
-.game-body {
+.game {
+  height: 100%;
+  width: 100%;
   .el-dialog {
     background: #D3D3D3;
   }
