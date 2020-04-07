@@ -5,23 +5,28 @@
   >
     <div class="opposite-container">
       <profile :profile-state="playerList[1]" />
-      <card
-        v-for="(item, index) in list"
-        :key="index"
-      />
+      <card-list :card-list="oppositeList" />
     </div>
-    <el-button @click="add">add</el-button>
+    <battleground />
+    <battleground />
+    <div class="self-container">
+      <profile :profile-state="playerList[0]" />
+      <card-list :is-player="true" :card-list="oppositeList" />
+    </div>
   </div>
 </template>
 <script>
 import profile from './profile'
-import card from './card'
+import cardList from './cardList'
+import cards from '@/utils/card'
+import battleground from './battleground'
 
 export default {
   name: 'game-body',
   components: {
     profile,
-    card
+    cardList,
+    battleground
   },
   props: {
     playerList: {
@@ -31,8 +36,12 @@ export default {
   },
   data() {
     return {
-      list: []
+      list: [],
+      oppositeList: []
     }
+  },
+  mounted() {
+    this.oppositeList = cards.slice(0, 4)
   },
   methods: {
     add() {
@@ -46,6 +55,10 @@ export default {
   width: 100%;
   height: 100%;
   .opposite-container {
+    display: flex;
+    flex-direction: row;
+  }
+  .self-container {
     display: flex;
     flex-direction: row;
   }

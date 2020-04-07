@@ -99,6 +99,9 @@ export default {
 .game {
   height: 100%;
   width: 100%;
+  padding: 20px;
+  background-image: url("../../assets/png/background.jpg");
+  background-size:100% 100%;
   .el-dialog {
     background: #D3D3D3;
   }
