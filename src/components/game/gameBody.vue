@@ -8,10 +8,10 @@
       <card-list :card-list="oppositeList" />
     </div>
     <battleground />
-    <battleground />
+    <battleground @updateList="updateList" />
     <div class="self-container">
       <profile :profile-state="playerList[0]" />
-      <card-list :is-player="true" :card-list="oppositeList" />
+      <card-list :is-player="true" :card-list="list" />
     </div>
   </div>
 </template>
@@ -42,10 +42,18 @@ export default {
   },
   mounted() {
     this.oppositeList = cards.slice(0, 4)
+    this.list = cards.slice(0, 4)
+    this.list.forEach((item, index) => {
+      item.idx = index
+    })
   },
   methods: {
     add() {
       this.list.push(3)
+    },
+    updateList(idx) {
+      console.log(idx)
+      this.list = this.list.filter(item => item.idx !== idx)
     }
   }
 }

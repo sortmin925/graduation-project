@@ -39,29 +39,5 @@ new Vue({
   el: '#app',
   router,
   store,
-  directives: {
-    drag: {
-      // 指令的定义
-      bind: function(el) {
-        const odiv = el
-        odiv.onmousedown = (e) => {
-          const disX = e.clientX - odiv.offsetLeft
-          const disY = e.clientY - odiv.offsetTop
-          document.onmousemove = (e) => {
-            const left = e.clientX - disX
-            const top = e.clientY - disY
-            this.positionX = top
-            this.positionY = left
-            odiv.style.left = left + 'px'
-            odiv.style.top = top + 'px'
-          }
-          document.onmouseup = (e) => {
-            document.onmousemove = null
-            document.onmouseup = null
-          }
-        }
-      }
-    }
-  },
   render: h => h(App)
 })

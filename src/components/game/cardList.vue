@@ -3,13 +3,10 @@
     <card
       v-for="(item, index) in cardList"
       :key="index"
-      v-drag
       :card="item"
       :is-player="isPlayer"
-      draggable="true"
-      @dragstart="dragStart($event, index)"
-      @dragover="allowDrop"
-      @drop="drop($event, index)"
+      :draggable="isPlayer"
+      @dragstart.native="dragstart($event, item, index)"
     />
   </div>
 </template>
@@ -33,14 +30,9 @@ export default {
     }
   },
   methods: {
-    dragStart(e, index) {
-      console.log(index)
-    },
-    drop(e, index) {
-      console.log(321 + index)
-    },
-    allowDrop(e) {
-      e.preventDefault()
+    dragstart(e, item, index) {
+      item.index = index
+      e.dataTransfer.setData('text/plain', JSON.stringify(item))
     }
   }
 }
